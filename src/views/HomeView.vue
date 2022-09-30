@@ -46,6 +46,13 @@ export default {
           console.log("recipes update error", error.response);
         });
     },
+    destroyRecipe: function (recipe) {
+      axios.delete("/recipes/" + recipe.id).then((response) => {
+        console.log("recipes destroy", response);
+        var index = this.recipes.indexOf(recipe);
+        this.recipes.splice(index, 1);
+      });
+    },
   },
 };
 </script>
@@ -122,6 +129,7 @@ export default {
           <input type="text" v-model="editRecipeParams.image" />
         </p>
         <button v-on:click="updateRecipe(currentRecipe)">Update</button>
+        <button v-on:click="destroyRecipe(currentRecipe)">Delete</button>
         <button>Close</button>
       </form>
     </dialog>
