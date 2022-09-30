@@ -1,18 +1,30 @@
 <script>
+import axios from "axios";
 export default {
   data: function () {
     return {
-      message: "Welcome to Vue.js!",
+      recipes: [],
     };
   },
-  created: function () {},
-  methods: {},
+  created: function () {
+    this.indexRecipes();
+  },
+  methods: {
+    indexRecipes: function () {
+      axios.get("/recipes").then((response) => {
+        console.log("recipes index", response);
+      });
+    },
+  },
 };
 </script>
 
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
+    <h1>All Recipes</h1>
+    <div v-for="recipe in recipes" v-bind:key="recipe.id">
+      <h2>{{ recipe.name }}</h2>
+    </div>
   </div>
 </template>
 
