@@ -5,6 +5,7 @@ export default {
     return {
       recipes: [],
       newRecipeParams: {},
+      editRecipeParams: {},
       currentRecipe: {},
     };
   },
@@ -33,6 +34,17 @@ export default {
     showRecipe: function (recipe) {
       this.currentRecipe = recipe;
       document.querySelector("#recipe-details").showModal();
+    },
+    updateRecipe: function (recipe) {
+      axios
+        .patch("/recipes/" + recipe.id, this.editRecipeParams)
+        .then((response) => {
+          console.log("recipes update", response);
+          this.currentRecipe = {};
+        })
+        .catch((error) => {
+          console.log("recipes update error", error.response);
+        });
     },
   },
 };
@@ -84,6 +96,32 @@ export default {
         <p>Instructions: {{ currentRecipe.instructions }}</p>
         <p>Prep-time: {{ currentRecipe.prep_minutes }}</p>
         <p>Cook-time: {{ currentRecipe.cook_minutes }}</p>
+        <h2>Edit:</h2>
+        <p>
+          Name:
+          <input type="text" v-model="editRecipeParams.name" />
+        </p>
+        <p>
+          Ingredients:
+          <input type="text" v-model="editRecipeParams.ingredients" />
+        </p>
+        <p>
+          Instructions:
+          <input type="text" v-model="editRecipeParams.instructions" />
+        </p>
+        <p>
+          Prep-time:
+          <input type="text" v-model="editRecipeParams.prep_minutes" />
+        </p>
+        <p>
+          Cook-time:
+          <input type="text" v-model="editRecipeParams.cook_minutes" />
+        </p>
+        <p>
+          Photo:
+          <input type="text" v-model="editRecipeParams.image" />
+        </p>
+        <button v-on:click="updateRecipe(currentRecipe)">Update</button>
         <button>Close</button>
       </form>
     </dialog>
