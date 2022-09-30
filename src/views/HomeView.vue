@@ -5,6 +5,7 @@ export default {
     return {
       recipes: [],
       newRecipeParams: {},
+      currentRecipe: {},
     };
   },
   created: function () {
@@ -28,6 +29,10 @@ export default {
         .catch((error) => {
           console.log("recipes create error", error.response);
         });
+    },
+    showRecipe: function (recipe) {
+      this.currentRecipe = recipe;
+      document.querySelector("#recipe-details").showModal();
     },
   },
 };
@@ -69,7 +74,19 @@ export default {
     <div v-for="recipe in recipes" v-bind:key="recipe.id">
       <h2>{{ recipe.name }}</h2>
       <img v-bind:src="recipe.image" v-bind:alt="recipe.name" />
+      <button v-on:click="showRecipe(recipe)">Read Recipe</button>
     </div>
+    <dialog id="recipe-details">
+      <form method="dialog">
+        <h1>Full Recipe</h1>
+        <p>Name: {{ currentRecipe.name }}</p>
+        <p>Ingredients: {{ currentRecipe.ingredients }}</p>
+        <p>Instructions: {{ currentRecipe.instructions }}</p>
+        <p>Prep-time: {{ currentRecipe.prep_minutes }}</p>
+        <p>Cook-time: {{ currentRecipe.cook_minutes }}</p>
+        <button>Close</button>
+      </form>
+    </dialog>
   </div>
 </template>
 
