@@ -147,5 +147,7 @@ img {
   border-radius: 4px;
   padding: 5px;
   width: 300px;
+  height: 300px;
+  object-fit: cover;
 }
 </style>
