@@ -93,7 +93,9 @@ export default {
     <div v-for="recipe in recipes" v-bind:key="recipe.id">
       <h2>{{ recipe.name }}</h2>
       <img v-bind:src="recipe.image" v-bind:alt="recipe.name" />
-      <button v-on:click="showRecipe(recipe)">Read Recipe</button>
+      <div>
+        <button v-on:click="showRecipe(recipe)">Read Recipe</button>
+      </div>
     </div>
     <dialog id="recipe-details">
       <form method="dialog">
@@ -136,4 +138,8 @@ export default {
   </div>
 </template>
 
-<style></style>
+<style>
+body {
+  background-color: lightblue;
+}
+</style>
