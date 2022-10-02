@@ -142,4 +142,10 @@ export default {
 body {
   background-color: lightblue;
 }
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 300px;
+}
 </style>
