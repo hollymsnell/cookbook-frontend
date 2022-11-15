@@ -150,4 +150,11 @@ img {
   height: 300px;
   object-fit: cover;
 }
+.button {
+  background-color: grey;
+  border: none;
+  color: black;
+  padding: 20px;
+  text-align: center;
+}
 </style>
